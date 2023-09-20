@@ -28,6 +28,11 @@ class Defender{
     }
   }
   
+  void act(){
+    find();
+    shoot();
+  }
+  
   void display(){
     noStroke();
     fill(127);

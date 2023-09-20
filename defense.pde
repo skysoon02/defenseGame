@@ -1,26 +1,18 @@
+GameMaster GM;  
 Defender defender;
 ArrayList<Enemy> enemies;
 ArrayList<Laser> lasers;
 ArrayList<Effect> effects;
 
-int genRate=10;
 
 void init(){
+  GM = new GameMaster();  
   defender = new Defender();
   enemies = new ArrayList<Enemy>();
   lasers = new ArrayList<Laser>();
   effects = new ArrayList<Effect>();
 }
 
-void genEnemy(){
-  float deg=random(2*PI);
-  enemies.add(new Enemy(deg));
-}
-
-void setup(){
-  size(1024, 576);
-  init();
-}
 
 void display(){
   for(Enemy e: enemies){
@@ -31,17 +23,22 @@ void display(){
     l.display();
   }
   
+  for(Effect e: effects){
+    e.display();
+  }
+  
   defender.display();
+}
+
+void setup(){
+  size(1024, 576);
+  init();
 }
 
 void draw(){
   background(0, 20, 40);
   translate(width/2, height/2);
-  
-  if(frameCount%genRate==0){
-    genEnemy();
-  }
-  
+  GM.playing();
   
   for(Laser l: lasers){
     l.move();
@@ -51,6 +48,7 @@ void draw(){
     e.move();
   }
   
-  defender.find();
-  defender.shoot();
+  defender.act();
+  
+  display();
 }

@@ -5,7 +5,7 @@ class Enemy{
     float v=random(2, 4);
     vx=-cos(deg)*v; vy=-sin(deg)*v;
     size=random(15, 26);
-    hp=random(3,5);
+    hp=random(1,2);
   }
   
   void move(){
